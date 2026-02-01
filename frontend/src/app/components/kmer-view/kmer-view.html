@@ -1,0 +1,24 @@
+<section class="mx-auto max-w-3xl px-6" aria-labelledby="files-heading" role="region">
+  <h2 id="files-heading" class="text-2xl font-semibold text-gray-900">Selected K-mer Size</h2>
+  <p class="mt-1 text-sm text-gray-700">You have selected the following K-mer size:</p>
+
+  <div>
+    <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+      <p-select
+        [options]="kMerSizes"
+        optionLabel="label"
+        optionValue="k"
+        placeholder="Select a K-mer Size"
+        class="w-full md:w-56"
+        [disabled]="ngControl?.disabled ?? false"
+        (onChange)="onKChange($event.value ?? null)"
+      />
+
+      <p class="mt-2 text-xs text-gray-600">Select the K-mer size to use for the analysis.</p>
+
+      @if (ngControl?.dirty && ngControl?.invalid) {
+        <p class="mt-2 text-sm text-red-600" role="alert">Select a K-mer size to continue.</p>
+      }
+    </div>
+  </div>
+</section>

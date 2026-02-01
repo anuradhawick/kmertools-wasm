@@ -1,0 +1,28 @@
+<p-toast />
+<h2 id="comp-form-heading" class="sr-only">Composition by K-mers Form</h2>
+<section>
+  <form [formGroup]="form" class="flex flex-col space-y-6" aria-labelledby="comp-form-heading">
+    <app-file-view formControlName="files" [minFileCount]="2"></app-file-view>
+    <app-kmer-view formControlName="kmer"></app-kmer-view>
+  </form>
+</section>
+<section class="mx-auto max-w-3xl px-6" aria-labelledby="comp-form-heading" role="region">
+  <div class="mt-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+    @if (form.dirty && form.invalid) {
+      <p class="text-sm text-red-700">
+        Please ensure all required fields are filled out correctly before proceeding.
+      </p>
+    }
+    <p-button
+      label="Vectorise and Visualise"
+      [disabled]="!form.valid"
+      (onClick)="computeCompositionVectors()"
+    />
+  </div>
+</section>
+
+@if (refNames().length > 0) {
+  <section class="mx-auto px-6" aria-labelledby="comp-form-heading" role="region">
+    <app-line-chart [refNames]="refNames()" [header]="header()" [data]="data()" />
+  </section>
+}

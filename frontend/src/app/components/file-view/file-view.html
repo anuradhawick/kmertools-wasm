@@ -1,0 +1,97 @@
+<section class="mx-auto max-w-3xl px-6" aria-labelledby="files-heading" role="region">
+  <h2 id="files-heading" class="text-2xl font-semibold text-gray-900">Selected files</h2>
+  <p class="mt-1 text-sm text-gray-700">You have added the following files:</p>
+
+  @if (files().length > 0) {
+    <div class="mt-4" aria-live="polite">
+      <ul class="space-y-2" role="list">
+        @for (file of files(); track $index) {
+          <li
+            class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+          >
+            <div class="flex items-center gap-3">
+              <span
+                aria-hidden="true"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-md bg-indigo-100 text-indigo-600 ring-1 ring-indigo-200"
+              >
+                <!-- simple inline icon -->
+                <svg
+                  class="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  focusable="false"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6zM8 13h8v2H8v-2zm0 4h8v2H8v-2zm6-11 5 5h-5V6z"
+                  />
+                </svg>
+              </span>
+              <div class="min-w-0">
+                <p class="truncate font-medium text-gray-900" title="{{ file.name }}">
+                  {{ file.name }}
+                </p>
+                <p class="text-sm text-gray-600">
+                  <span class="sr-only">File size:</span
+                  >{{ file.size / 1024 / 1024 | number: '1.2-2' }} MB
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="rounded-full p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"
+              (click)="removeFile($index)"
+              [attr.aria-label]="'Remove ' + file.name"
+            >
+              <svg
+                class="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+  } @else {
+    <div class="mt-4 rounded-lg border border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+      <p class="text-sm text-gray-700">No files added yet.</p>
+      <p class="mt-1 text-xs text-gray-600">
+        Accepted types: .fasta, .fa, .fastq, .fq. Max size per file: 1024 MB.
+      </p>
+    </div>
+  }
+
+  <div class="mt-6">
+    <p-toast />
+    <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+      <p-fileupload
+        mode="basic"
+        name="demo[]"
+        aria-label="Upload files"
+        chooseIcon="pi pi-upload"
+        accept=".fasta,.fa,.fastq,.fq"
+        [maxFileSize]="1024 * 1024 * 1024"
+        multiple="true"
+        (onSelect)="onSelect($event)"
+        chooseLabel="Browse"
+        [disabled]="ngControl?.disabled ?? false"
+      />
+      <p class="mt-2 text-xs text-gray-600">Use the Browse button to select files.</p>
+
+      @if (ngControl?.dirty && ngControl?.invalid) {
+        <p class="mt-2 text-sm text-red-600" role="alert">
+          Add at least {{ minFileCount() }} file{{ minFileCount() === 1 ? '' : 's' }} to continue.
+        </p>
+      }
+    </div>
+  </div>
+</section>

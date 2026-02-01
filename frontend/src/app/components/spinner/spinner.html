@@ -1,0 +1,11 @@
+@if (isLoading()) {
+  <div class="spinner-overlay" role="alert" aria-busy="true" aria-live="assertive">
+    <div class="spinner-container">
+      <div class="spinner" aria-hidden="true"></div>
+      @if (message()) {
+        <p class="spinner-message">{{ message() }}</p>
+      }
+      <span class="visually-hidden">Loading{{ message() ? ': ' + message() : '' }}</span>
+    </div>
+  </div>
+}
