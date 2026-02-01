@@ -2,6 +2,8 @@
 
 A web-based bioinformatics application that runs **kmertools** (a Rust-based genomic analysis library) entirely in the browser using WebAssembly. This project demonstrates how to compile a Rust library to WebAssembly using the `wasm32-unknown-emscripten` toolchain and run it via Pyodide in a modern Angular frontend.
 
+Try it now 👉 [https://kmertools-wasm.anuradhawick.com](https://kmertools-wasm.anuradhawick.com)
+
 ## 🧬 What is Kmertools?
 
 [Kmertools](https://github.com/anuradhawick/kmertools) is a high-performance Rust library for k-mer analysis of genomic sequences. It provides tools for:
