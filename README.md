@@ -6,6 +6,12 @@ A web-based bioinformatics application that runs **kmertools** (a Rust-based gen
 
 [Kmertools](https://github.com/anuradhawick/kmertools) is a high-performance Rust library for k-mer analysis of genomic sequences. It provides tools for:
 
+<div align="center">
+<a href="https://pypi.org/project/pykmertools/">
+  <img width="600px" src="./frontend/public/screenshot.png">
+</a>
+</div>
+
 - **K-mer counting and vectorisation** - Compute oligonucleotide frequency vectors
 - **Chaos Game Representation (CGR)** - Visualise DNA sequences as 2D scatter plots
 
